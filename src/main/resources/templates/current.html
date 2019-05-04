@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Current</title>
+    <style>
+        body {
+            background-color: lightslategray;
+        }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="card-panel">
+        <h4 class="center-align"> 65308 - HW1 </h4>
+        <a class="waves-effect waves-light btn" th:href="@{/}"> Back </a>
+        <table class="highlight centered">
+            <thead>
+            <tr>
+                <th scope="col">Location</th>
+                <th scope="col">Current</th>
+                <th scope="col">Min Temp</th>
+                <th scope="col">Max Temp</th>
+                <th scope="col">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${current.getLocation()}"></td>
+                <td th:text="${current.getCurr()} + ' ºC'"></td>
+                <td th:text="${current.getMin()} + ' ºC'"></td>
+                <td th:text="${current.getMax()} + ' ºC'"></td>
+                <td th:text="${current.getDescription()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

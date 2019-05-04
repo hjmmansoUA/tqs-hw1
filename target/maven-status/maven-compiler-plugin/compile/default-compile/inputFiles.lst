@@ -1,0 +1,8 @@
+/home/hjmmanso/Projects/hw1/src/main/java/com/tqs/hw1/Controller/WeatherAPI.java
+/home/hjmmanso/Projects/hw1/src/main/java/com/tqs/hw1/Controller/ErrorHandling.java
+/home/hjmmanso/Projects/hw1/src/main/java/com/tqs/hw1/entities/OpenWeatherConsume.java
+/home/hjmmanso/Projects/hw1/src/main/java/com/tqs/hw1/Repository/WeatherRepo.java
+/home/hjmmanso/Projects/hw1/src/main/java/com/tqs/hw1/Controller/WeatherController.java
+/home/hjmmanso/Projects/hw1/src/main/java/com/tqs/hw1/entities/WeatherEntity.java
+/home/hjmmanso/Projects/hw1/src/main/java/com/tqs/hw1/Controller/CustomExcection.java
+/home/hjmmanso/Projects/hw1/src/main/java/com/tqs/hw1/Hw1Application.java
