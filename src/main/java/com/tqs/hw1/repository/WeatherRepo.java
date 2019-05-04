@@ -9,11 +9,11 @@ import java.util.List;
 @Component
 public interface WeatherRepo extends CrudRepository<WeatherEntity, Long> {
 
-    WeatherEntity findByLocation(String location);
+  WeatherEntity findByLocation(String location);
 
-    List<WeatherEntity> findAllByLocation(String location);
+  List<WeatherEntity> findAllByLocation(String location);
 
-    WeatherEntity findByUniqueKey(String uniqueKey);
+  WeatherEntity findByUniqueKey(String uniqueKey);
 
-    void deleteWeatherEntityByLocation(String location);
+  void deleteWeatherEntityByLocation(String location);
 }

@@ -4,7 +4,6 @@ import com.tqs.hw1.Hw1Application;
 import com.tqs.hw1.repository.WeatherRepo;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -35,7 +34,8 @@ public class OpenWeatherConsume {
 
   public WeatherEntity sendRequestForWeatherNow(String city) {
 
-    HttpUriRequest get = RequestBuilder.get()
+    HttpUriRequest get =
+        RequestBuilder.get()
             .setUri(BASE_URL + NOW + "?q=" + city + "&appid=" + ACCESS_KEY + UNIT)
             .build();
 
@@ -67,7 +67,8 @@ public class OpenWeatherConsume {
   public List<WeatherEntity> sendRequestForWeatherInfo(String city) {
 
     List<WeatherEntity> reportWeather = new ArrayList<>();
-    HttpUriRequest get = RequestBuilder.get()
+    HttpUriRequest get =
+        RequestBuilder.get()
             .setUri(BASE_URL + FORECAST + "?q=" + city + "&appid=" + ACCESS_KEY + UNIT)
             .build();
 
