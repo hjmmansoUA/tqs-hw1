@@ -1,6 +1,6 @@
 package com.tqs.hw1;
 
-import com.tqs.hw1.Repository.WeatherRepo;
+import com.tqs.hw1.repository.WeatherRepo;
 import com.tqs.hw1.entities.WeatherEntity;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

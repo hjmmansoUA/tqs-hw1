@@ -1,19 +1,20 @@
 package com.tqs.hw1.entities;
 
-import com.tqs.hw1.Repository.WeatherRepo;
+import com.tqs.hw1.Hw1Application;
+import com.tqs.hw1.repository.WeatherRepo;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpException;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,10 +31,13 @@ public class OpenWeatherConsume {
 
   @Autowired private WeatherRepo weatherRepo;
 
-  public OpenWeatherConsume() {}
+  private static Logger logger = LoggerFactory.getLogger(Hw1Application.class);
 
   public WeatherEntity sendRequestForWeatherNow(String city) {
-    HttpGet get = new HttpGet(BASE_URL + NOW + "?q=" + city + "&appid=" + ACCESS_KEY + UNIT);
+
+    HttpUriRequest get = RequestBuilder.get()
+            .setUri(BASE_URL + NOW + "?q=" + city + "&appid=" + ACCESS_KEY + UNIT)
+            .build();
 
     WeatherEntity result = null;
 
@@ -42,21 +46,20 @@ public class OpenWeatherConsume {
       HttpEntity entity = response.getEntity();
 
       JSONObject weatherReport = new JSONObject(EntityUtils.toString(entity));
-      System.out.println(weatherReport);
       if (weatherReport.has("dt")) {
         double temp = weatherReport.getJSONObject("main").getDouble("temp");
-        double temp_min = weatherReport.getJSONObject("main").getDouble("temp_min");
-        double temp_max = weatherReport.getJSONObject("main").getDouble("temp_max");
+        double tempMin = weatherReport.getJSONObject("main").getDouble("temp_min");
+        double tempMax = weatherReport.getJSONObject("main").getDouble("temp_max");
         String description =
             weatherReport.getJSONArray("weather").getJSONObject(0).getString("description");
-        result = new WeatherEntity(temp_min, temp_max, temp, description, city);
+        result = new WeatherEntity(tempMin, tempMax, temp, description, city);
 
         response.close();
       } else {
         return null;
       }
     } catch (IOException e) {
-      e.printStackTrace();
+      logger.error(e.toString());
     }
     return result;
   }
@@ -64,7 +67,9 @@ public class OpenWeatherConsume {
   public List<WeatherEntity> sendRequestForWeatherInfo(String city) {
 
     List<WeatherEntity> reportWeather = new ArrayList<>();
-    HttpGet get = new HttpGet(BASE_URL + FORECAST + "?q=" + city + "&appid=" + ACCESS_KEY + UNIT);
+    HttpUriRequest get = RequestBuilder.get()
+            .setUri(BASE_URL + FORECAST + "?q=" + city + "&appid=" + ACCESS_KEY + UNIT)
+            .build();
 
     try {
       CloseableHttpResponse response = httpClient.execute(get);
@@ -78,27 +83,25 @@ public class OpenWeatherConsume {
           JSONObject tmp = report.getJSONObject(i);
 
           double temp = tmp.getJSONObject("main").getDouble("temp");
-          double temp_min = tmp.getJSONObject("main").getDouble("temp_min");
-          double temp_max = tmp.getJSONObject("main").getDouble("temp_max");
+          double tempMin = tmp.getJSONObject("main").getDouble("temp_min");
+          double tempMax = tmp.getJSONObject("main").getDouble("temp_max");
           String description =
               tmp.getJSONArray("weather").getJSONObject(0).getString("description");
           String date = tmp.getString("dt_txt");
 
-          WeatherEntity result =
-              new WeatherEntity(temp_min, temp_max, temp, date, description, city);
+          WeatherEntity result = new WeatherEntity(tempMin, tempMax, temp, date, description, city);
 
           // NOTE: unique = true doesnt work this is workaround
           if (weatherRepo.findByUniqueKey(city.concat(date)) == null) weatherRepo.save(result);
           reportWeather.add(result);
         }
       } else {
-        return null;
+        return reportWeather;
       }
 
       response.close();
     } catch (IOException e) {
-      e.printStackTrace();
-      return null;
+      logger.error(e.toString());
     }
 
     return reportWeather;

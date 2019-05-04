@@ -14,15 +14,14 @@ public class Selenium {
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
-  @LocalServerPort
-  private Integer localPort;
+  @LocalServerPort private Integer localPort;
 
   @Before
   public void setUp() throws Exception {
     // TODO: fix webdriver
     System.setProperty("webdriver.chrome.driver", "/home/hjmmanso/cmd/chromedriver");
     driver = new ChromeDriver();
-    baseUrl = "http://localhost:"+localPort+"/";
+    baseUrl = "http://localhost:" + localPort + "/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
@@ -32,9 +31,9 @@ public class Selenium {
     driver.findElement(By.name("location")).click();
     driver.findElement(By.name("location")).clear();
     driver.findElement(By.name("location")).sendKeys("Aveiro");
-    Thread.sleep(3000);
+    wait(3000);
     driver.findElement(By.xpath("//button[@value='current']")).click();
-    Thread.sleep(3000);
+    wait(3000);
   }
 
   @Test
@@ -43,9 +42,9 @@ public class Selenium {
     driver.findElement(By.name("location")).click();
     driver.findElement(By.name("location")).clear();
     driver.findElement(By.name("location")).sendKeys("Aveiro");
-    Thread.sleep(3000);
+    wait(3000);
     driver.findElement(By.xpath("//button[@value='forecast']")).click();
-    Thread.sleep(3000);
+    wait(3000);
   }
 
   @After

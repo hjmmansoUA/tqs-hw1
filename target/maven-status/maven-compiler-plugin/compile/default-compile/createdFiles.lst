@@ -1,7 +1,7 @@
+com/tqs/hw1/controller/CustomExcection.class
 com/tqs/hw1/Hw1Application.class
-com/tqs/hw1/Controller/WeatherController.class
-com/tqs/hw1/Repository/WeatherRepo.class
-com/tqs/hw1/Controller/CustomExcection.class
-com/tqs/hw1/Controller/ErrorHandling.class
+com/tqs/hw1/controller/ErrorHandling.class
+com/tqs/hw1/repository/WeatherRepo.class
+com/tqs/hw1/controller/WeatherController.class
+com/tqs/hw1/controller/WeatherAPI.class
 com/tqs/hw1/entities/OpenWeatherConsume.class
-com/tqs/hw1/Controller/WeatherAPI.class

@@ -1,4 +1,4 @@
-package com.tqs.hw1.Repository;
+package com.tqs.hw1.repository;
 
 import com.tqs.hw1.entities.WeatherEntity;
 import org.springframework.data.repository.CrudRepository;
