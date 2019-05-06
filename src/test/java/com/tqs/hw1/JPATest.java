@@ -6,15 +6,17 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 @Nested
-@SpringBootTest
+@RunWith(SpringRunner.class)
+@DataJpaTest
 class JPATest {
 
   @Autowired private WeatherRepo weatherRepo;
@@ -38,7 +40,6 @@ class JPATest {
     assertEquals(1, weatherRepo.findAllByLocation("testlocation1").size());
     assertEquals(1, weatherRepo.findAllByLocation("testlocation2").size());
   }
-
 
   @Test
   @Transactional
