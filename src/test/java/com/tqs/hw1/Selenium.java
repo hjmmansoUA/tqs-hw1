@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.springframework.boot.web.server.LocalServerPort;
 
 public class Selenium {
   private WebDriver driver;
@@ -14,14 +13,13 @@ public class Selenium {
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
-  @LocalServerPort private Integer localPort;
 
   @Before
   public void setUp() throws Exception {
     // TODO: fix webdriver
     System.setProperty("webdriver.chrome.driver", "/home/hjmmanso/cmd/chromedriver");
     driver = new ChromeDriver();
-    baseUrl = "http://localhost:" + localPort + "/";
+    baseUrl = "http://localhost:8080/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
