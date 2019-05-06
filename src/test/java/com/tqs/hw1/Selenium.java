@@ -29,9 +29,7 @@ public class Selenium {
     driver.findElement(By.name("location")).click();
     driver.findElement(By.name("location")).clear();
     driver.findElement(By.name("location")).sendKeys("Aveiro");
-    wait(3000);
     driver.findElement(By.xpath("//button[@value='current']")).click();
-    wait(3000);
   }
 
   @Test
@@ -40,9 +38,7 @@ public class Selenium {
     driver.findElement(By.name("location")).click();
     driver.findElement(By.name("location")).clear();
     driver.findElement(By.name("location")).sendKeys("Aveiro");
-    wait(3000);
     driver.findElement(By.xpath("//button[@value='forecast']")).click();
-    wait(3000);
   }
 
   @After
